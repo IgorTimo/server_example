@@ -4,6 +4,7 @@ import sha256 from "sha256";
 import postRecord from "../utils/postRecord";
 import addRecord from "../utils/addRecord";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Index = () => {
   const [hashsOfRecords, setHashesOfRecords] = useState([]);
@@ -21,7 +22,11 @@ const Index = () => {
   }, []);
 
   const renderHashesOfRecords = hashsOfRecords.map((hash, index) => (
-    <li key={index}>{hash}</li>
+    <li key={index}>
+      <Link href={{ pathname: "/show", query: { hash } }}>
+        {hash}
+      </Link>
+    </li>
   ));
 
   const handleSubmit = async (event) => {
